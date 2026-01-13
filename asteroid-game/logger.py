@@ -3,6 +3,7 @@ import json
 import math
 from datetime import datetime
 
+
 __all__ = ["log_state", "log_event"]
 
 _FPS = 60
