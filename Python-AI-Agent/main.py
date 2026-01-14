@@ -13,7 +13,13 @@ def main():
         type=str,
         help="User prompt",
     )
+    parser.add_argument("--verbose", action="store_true", help="Enable verbose output")    
     args = parser.parse_args()
+    if args.verbose:
+        print("User prompt:", args.user_prompt)
+
+
+
 
     # Load environment variables and get API key
     load_dotenv()
@@ -43,8 +49,9 @@ def main():
         raise RuntimeError("Usage metadata is missing in the response.")
 
     # Print usage and response
-    print("Prompt tokens:", response.usage_metadata.prompt_token_count)
-    print("Response tokens:", response.usage_metadata.candidates_token_count)
+    if args.verbose:
+        print("Prompt tokens:", response.usage_metadata.prompt_token_count)
+        print("Response tokens:", response.usage_metadata.candidates_token_count)
     print(response.text)
 
 
